@@ -20,5 +20,6 @@ jobs:
     - name: rollout restart deploy 
       run: |
         kubectl rollout restart deployment stage
-
-
+    - name: rollout restart deploy 
+      run: |
+        kubectl apply -f v2.yml
