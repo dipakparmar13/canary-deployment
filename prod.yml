@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stage
+  name: prod
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: stage
+      app: prod
   template:
     metadata:
-      name: stage-pod
+      name: prod-pod
       labels:
-        app: stage
-        version: v1
+        app: prod
+        version: v2
     spec:
       containers:
-      - name: stage-container
+      - name: prod-container
         image: "dipak:latest"
         imagePullPolicy: Never
         ports:
@@ -24,13 +24,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: stage-service
+  name: prod-service
   labels:
-    app: stage
-    version: v1
+    app: prod
+    version: v2
 spec:
   selector:
-    app: stage
+    app: prod
   ports:
     - port: 5000
       targetPort: 5000
@@ -38,7 +38,10 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: stage-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "40"
+  name: prod-ingress
 spec:
   rules:
     - host: stage.info
@@ -48,6 +51,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: stage-service
+                name: prod-service
                 port:
                   number: 5000
