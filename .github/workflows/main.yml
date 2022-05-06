@@ -19,7 +19,7 @@ jobs:
         docker images 
     - name: rollout restart deploy 
       run: |
-        kubectl rollout restart deployment prod
+        kubectl rollout restart deployment stage
         
 #   deploy: 
 #     runs-on: self-hosted
