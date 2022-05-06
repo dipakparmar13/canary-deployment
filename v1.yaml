@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
       - name: stage-container
-        image: "appv2:latest"
-        imagePullPolicy: Never
+        image: "viraj5132/canary:latest"
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
 ---
@@ -41,7 +41,7 @@ metadata:
   name: stage-ingress
 spec:
   rules:
-    - host: nodeapp.info
+    - host: stage.info
       http:
         paths:
           - path: /
