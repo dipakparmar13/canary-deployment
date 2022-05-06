@@ -8,7 +8,7 @@ jobs:
   stage:
     runs-on: self-hosted
     name: build example
-    if: github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/stage'
     steps:
     # - name: roolut restart deploy 
     #   run: |
