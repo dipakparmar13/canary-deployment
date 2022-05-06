@@ -1,8 +1,6 @@
-FROM nginx
-
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-WORKDIR /usr/share/nginx/html
-COPY index.html .
-
-CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
+FROM node:14
+WORKDIR /usr/src/app
+COPY . .
+RUN npm install
+EXPOSE 3000
+CMD [ "node", "server.js" ]
