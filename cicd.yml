@@ -1,0 +1,52 @@
+name: CI
+on:
+ pull:
+   branches:
+     - stage
+     - main
+jobs:
+  stage:
+    runs-on: self-hosted
+    name: build example
+    if: github.ref == 'refs/heads/dev'
+    steps:
+    - name: roolut restart deploy 
+      run: |
+        kubectl rollout restart deplotment stage
+    - uses: actions/checkout@v2
+    - name: Try the cluster !
+      run: kubectl get pods -A
+    - name: Build images
+      run: |
+        export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
+        docker build -t dipak ./appB/
+        echo -n "verifying images:"
+        docker images 
+    - name: Deploy to service
+      run: 
+        kubectl apply -f prod.yml
+        
+  deploy: 
+    runs-on: self-hosted
+    name: deploy too minikube
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: roolut restart deploy 
+      run: |
+        kubectl rollout restart deplotment prod
+    - uses: actions/checkout@v2
+    - name: Try the cluster !
+      run: kubectl get pods -A
+    - name: Build images
+      run: |
+        export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
+        docker build -t dipak ./appG/
+        echo -n "verifying images:"
+        docker images        
+        export COLOUR=blue
+    - name: Deploy to service
+      run: 
+         kubectl apply -f stage.yml
+    
