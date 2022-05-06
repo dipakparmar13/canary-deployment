@@ -17,9 +17,9 @@ jobs:
         docker build -t dipak .
         echo -n "verifying images:"
         docker images 
-#     - name: rollout restart deploy 
-#       run: |
-#         kubectl rollout restart deployment prod
+    - name: rollout restart deploy 
+      run: |
+        kubectl rollout restart deployment prod
         
 #   deploy: 
 #     runs-on: self-hosted
