@@ -7,7 +7,7 @@ jobs:
   stage:
     runs-on: self-hosted
     name: build example
-    if: github.ref == 'refs/heads/stage'
+    if: github.ref == 'refs/heads/prod'
     steps:
     - uses: actions/checkout@v2
     - name: Try the cluster !
@@ -19,7 +19,7 @@ jobs:
         docker build -t dipak .
         echo -n "verifying images:"
         docker images 
-    - name: roolut restart deploy 
+    - name: rollout restart deploy 
       run: |
         kubectl rollout restart deployment prod
         
