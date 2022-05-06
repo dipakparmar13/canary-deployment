@@ -1,6 +1,6 @@
 name: CI
 on:
- pull:
+ push:
    branches:
      - stage
      - main
@@ -20,7 +20,7 @@ jobs:
       run: |
         export SHELL=/bin/bash
         eval $(minikube -p minikube docker-env)
-        docker build -t dipak ./appB/
+        docker build -t dipak .
         echo -n "verifying images:"
         docker images 
     - name: Deploy to service
@@ -42,7 +42,7 @@ jobs:
       run: |
         export SHELL=/bin/bash
         eval $(minikube -p minikube docker-env)
-        docker build -t dipak ./appG/
+        docker build -t dipak .
         echo -n "verifying images:"
         docker images        
         export COLOUR=blue
