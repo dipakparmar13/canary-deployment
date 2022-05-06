@@ -14,7 +14,9 @@ jobs:
       run: kubectl get pods -A
     - name: Build images
       run: |
+        pwd
         docker build -t dipak .
+        pwd
         echo -n "verifying images:"
         docker images 
     - name: rollout restart deploy 
