@@ -8,11 +8,9 @@ jobs:
   stage:
     runs-on: self-hosted
     name: build example
-    if: github.ref == 'refs/heads/dev'
+    if: github.ref == 'refs/heads/stage'
     steps:
-    - name: roolut restart deploy 
-      run: |
-        kubectl rollout restart deplotment stage
+   
     - uses: actions/checkout@v2
     - name: Try the cluster !
       run: kubectl get pods -A
@@ -23,18 +21,15 @@ jobs:
         docker build -t dipak .
         echo -n "verifying images:"
         docker images 
-    - name: Deploy to service
-      run: 
-        kubectl apply -f prod.yml
+    - name: roolut restart deploy 
+      run: |
+         kubectl rollout restart deplotment stage
         
   deploy: 
     runs-on: self-hosted
     name: deploy too minikube
     if: github.ref == 'refs/heads/main'
     steps:
-    - name: roolut restart deploy 
-      run: |
-        kubectl rollout restart deplotment prod
     - uses: actions/checkout@v2
     - name: Try the cluster !
       run: kubectl get pods -A
@@ -46,7 +41,6 @@ jobs:
         echo -n "verifying images:"
         docker images        
         export COLOUR=blue
-    - name: Deploy to service
-      run: 
-         kubectl apply -f stage.yml
-    
+    - name: roolut restart deploy 
+      run: |
+         kubectl rollout restart deplotment prod
