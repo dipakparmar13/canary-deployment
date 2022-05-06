@@ -23,7 +23,7 @@ jobs:
         docker images 
     - name: roolut restart deploy 
       run: |
-         kubectl rollout restart deployment stage
+         kubectl rollout restart deployment prod
         
   deploy: 
     runs-on: self-hosted
@@ -43,4 +43,4 @@ jobs:
         export COLOUR=blue
     - name: roolut restart deploy 
       run: |
-         kubectl rollout restart deployment prod
+         kubectl rollout restart deployment stage
