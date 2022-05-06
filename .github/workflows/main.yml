@@ -32,9 +32,9 @@ jobs:
     name: deploy too minikube
     if: github.ref == 'refs/heads/main'
     steps:
-    # - name: roolut restart deploy 
-    #   run: |
-    #     kubectl rollout restart deplotment prod
+    - name: roolut restart deploy 
+      run: |
+        kubectl rollout restart deplotment prod
     - uses: actions/checkout@v2
     - name: Try the cluster !
       run: kubectl get pods -A
