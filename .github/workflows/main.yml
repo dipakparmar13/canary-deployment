@@ -25,7 +25,7 @@ jobs:
         docker images 
     - name: Deploy to service
       run: 
-        kubectl apply -f prod.yml
+        kubectl apply -f stage.yml
         
   deploy: 
     runs-on: self-hosted
@@ -48,5 +48,5 @@ jobs:
         export COLOUR=blue
     - name: Deploy to service
       run: 
-         kubectl apply -f stage.yml
+         kubectl apply -f prod.yml
     
