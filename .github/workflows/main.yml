@@ -3,7 +3,7 @@ on:
  push:
    branches:
      - stage
-     - main
+    
 jobs:
   stage:
     runs-on: self-hosted
@@ -24,23 +24,23 @@ jobs:
       run: |
         kubectl rollout restart deployment stage
         
-  deploy: 
-    runs-on: self-hosted
-    name: deploy too minikube
-    if: github.ref == 'refs/heads/main'
-    steps:
-    - uses: actions/checkout@v2
-    - name: Try the cluster !
-      run: kubectl get pods -A
-    - name: Build images
-      run: |
-        export SHELL=/bin/bash
-        eval $(minikube -p minikube docker-env)
-        docker build -t dipak .
-        echo -n "verifying images:"
-        docker images        
-        export COLOUR=blue
-    - name: roolut restart deploy 
-      run: |
-        kubectl rollout restart deployment prod
+#   deploy: 
+#     runs-on: self-hosted
+#     name: deploy too minikube
+#     if: github.ref == 'refs/heads/main'
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Try the cluster !
+#       run: kubectl get pods -A
+#     - name: Build images
+#       run: |
+#         export SHELL=/bin/bash
+#         eval $(minikube -p minikube docker-env)
+#         docker build -t dipak .
+#         echo -n "verifying images:"
+#         docker images        
+#         export COLOUR=blue
+#     - name: roolut restart deploy 
+#       run: |
+#         kubectl rollout restart deployment prod
     
