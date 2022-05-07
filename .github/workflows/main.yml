@@ -21,8 +21,8 @@ jobs:
         docker images 
     - name: rollout restart deploy 
       run: |
-        kubectl apply -f v1.yaml
+        kubectl rollout restart deploy prod
     - name: rollout restart deploy 
       run: |
-        kubectl apply -f v2.yaml
+        kubectl rollout restart deploy stage
     
