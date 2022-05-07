@@ -41,7 +41,7 @@ metadata:
   name: stage-ingress
 spec:
   rules:
-    - host: dipakparmar.com
+    - host: dipak.info
       http:
         paths:
           - path: /
