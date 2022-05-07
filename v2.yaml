@@ -44,7 +44,7 @@ metadata:
   name: prod-ingress
 spec:
   rules:
-    - host: stage.info
+    - host: dipak.info
       http:
         paths:
           - path: /
